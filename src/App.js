@@ -8,32 +8,60 @@ import { useEffect, useRef, useState } from 'react';
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from './components/utils/firebase.js';
 
-
+const tag1Options = [
+  'Solitario(a)',
+  'Casero(a)',
+  'Reservado(a)',
+  'Extrovertido(a)'
+]
 
 function App() {
-
-  const [userCounter, setUserCounter] = useState(0);
+  const mesh = useRef();
+  const [usersData, setUsersData] = useState([]);
 
   useEffect(() => { 
-    const userCollection = collection(db, "users");
-    const userSnapshot =  onSnapshot(userCollection,(snapshot) => {
-      const numUsers = snapshot.size;
-      setUserCounter(numUsers);
-      console.log(`Hay ${numUsers} usuarios en la base de datos`);
-      snapshot.docs.forEach(userData => console.log(userData.data()));
-    });
-    
-      return () => userSnapshot();
+    const getUsers = async () => {
+      try {
+        const userCollection = collection(db, "users");
+        const usersSnapshot = await getDocs(userCollection);
+
+        const arr = [];
+        usersSnapshot.forEach(doc => {
+          arr.push(doc.data());
+        });
+        setUsersData(arr);
+      } catch(e) {
+        console.error(e.message);
+      }
+    };
+
+    getUsers();
   }, []);
 
-  const mesh = useRef();
   return (
     <div className="App" style={{width: "100%" , height: "100vh"}}>
       <Canvas camera={{position: [10, 0, 10]}}>
         <Camera/>
-        <mesh ref={mesh}  position={[0,0,0]}>
-          <Blob />
-        </mesh>  
+
+        {usersData.map((user, i) => {
+          const pattern = tag1Options.findIndex(tag => user.tags[0].value === tag);
+          console.log(user);
+
+          // Intensidad número float 1.0 1.5
+
+          return (
+            <mesh ref={mesh}  position={[i * 5,0,0]} key={user.id}>
+              <Blob 
+                pattern={pattern} 
+                intensity={(Math.random() * 8).toFixed(1)}
+                color1={
+                  {r: Math.random().toFixed(3), g: Math.random().toFixed(3), b: Math.random().toFixed(3)}
+                }
+                color2={
+                  {r: Math.random().toFixed(3), g: Math.random().toFixed(3), b: Math.random().toFixed(3)}
+                }/>
+            </mesh>)
+        })}
         <OrbitControls />
       </Canvas>
     </div>

@@ -1,4 +1,4 @@
-const fragmentShader = /*glsl*/ `
+const fragmentShader = (color1, color2) => /*glsl*/ `
     uniform float uIntensity;
     uniform float uTime;
 
@@ -26,10 +26,12 @@ const fragmentShader = /*glsl*/ `
 
         //float mixValue = vUv.y;
 
-        vec3 rosita = vec3(0.957,0.529,0.714);
-        vec3 amarillo = vec3(0.992,0.882,0.176);
+        /* vec3 color1 = vec3(0.957,0.529,0.714);
+        vec3 color2 = vec3(0.992,0.882,0.176); */
+        vec3 color1 = vec3(${color1.r}, ${color1.g}, ${color1.b});
+        vec3 color2 = vec3(${color2.r}, ${color2.g}, ${color2.b});
 
-        vec3 finalColor = mix( amarillo,rosita, 0.5 + distort * 2.5);
+        vec3 finalColor = mix( color2,color1, 0.5 + distort * 2.5);
 
         //agregarle animación
         

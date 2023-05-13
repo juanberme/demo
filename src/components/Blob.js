@@ -5,10 +5,10 @@ import fragmentShader from './FragmentShader.js';
 import { useFrame } from '@react-three/fiber';
 
 //POSIBLES FALLAS
-import vertexShaderPars from './pruebas/vertex_pars.js';
-import vertexShaderMain from './pruebas/vertex_main.js';
+//import vertexShaderPars from './pruebas/vertex_pars.js';
+//import vertexShaderMain from './pruebas/vertex_main.js';
 
-const Blob = () => {
+const Blob = ({pattern, intensity, color1, color2}) => {
 const mesh = useRef();
 const hover = useRef(false);
 
@@ -27,11 +27,11 @@ const onBeforeCompile = (shader) => {
     console.log(shader.uniforms.uTime);
 
     //POSIBLES FALLAS
-    const parsVertexString = /*glsl*/ `#include <displacementmap_pars_vertex>`
-    shader.vertexShader = shader.vertexShader.replace(parsVertexString, parsVertexString + vertexShaderPars);
+    //const parsVertexString = /*glsl*/ `#include <displacementmap_pars_vertex>`
+    //shader.vertexShader = shader.vertexShader.replace(parsVertexString, parsVertexString + vertexShaderPars);
 
-    const mainVertexString = /*glsl*/ `#include <displacementmap_vertex>`
-    shader.vertexShader = shader.vertexShader.replace(mainVertexString, mainVertexString + vertexShaderMain);
+    //const mainVertexString = /*glsl*/ `#include <displacementmap_vertex>`
+    //shader.vertexShader = shader.vertexShader.replace(mainVertexString, mainVertexString + vertexShaderMain);
 }
 
 useFrame((state) =>{
@@ -48,15 +48,11 @@ useFrame((state) =>{
 
   //shaders
   //<meshStandardMaterial onBeforeCompile={onBeforeCompile}/>
-  
-  
-  console.log(typeof vertexShader);
-  
 })
   return (
    <mesh ref={mesh}>
     <icosahedronGeometry args={[1, 100]}/>
-    <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms}/>
+    <shaderMaterial vertexShader={vertexShader(pattern, intensity)} fragmentShader={fragmentShader(color1, color2)} uniforms={uniforms}/>
    </mesh>
   )
 }

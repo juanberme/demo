@@ -18,7 +18,7 @@ const uniforms = useMemo(() => {
     uIntensity: {value: 0.3},
     uPattern: {value: pattern}
   };
-});
+}, []);
 
 const onBeforeCompile = (shader) => {
     mesh.current.material.shader = shader

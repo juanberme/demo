@@ -25,7 +25,9 @@ function App() {
     const unsubscribe = onSnapshot(userCollection, (usersSnapshot) => {
       const arr = [];
       usersSnapshot.forEach(doc => {
-        arr.push({...doc.data(), id: doc.id});
+        if(doc.data().tags && doc.data().tags.length === 4) {
+          arr.push({...doc.data(), id: doc.id});
+        }
       });
       setUsersData(arr);
     }, (e) => console.error(e));

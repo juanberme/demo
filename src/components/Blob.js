@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { AmbientLight, IcosahedronGeometry, MathUtils, MeshStandardMaterial } from 'three';
 import vertexShader from './VertexShader.js';
 import fragmentShader from './FragmentShader.js';
@@ -15,7 +15,8 @@ const hover = useRef(false);
 const uniforms = useMemo(() => {
   return {
     uTime: {value: 0},
-    uIntensity: {value: 0.3}
+    uIntensity: {value: 0.3},
+    uPattern: {value: pattern}
   };
 });
 
@@ -34,9 +35,12 @@ const onBeforeCompile = (shader) => {
     //shader.vertexShader = shader.vertexShader.replace(mainVertexString, mainVertexString + vertexShaderMain);
 }
 
+useEffect(() => {
+  mesh.current.material.uniforms.uPattern.value = pattern;
+}, [pattern, intensity]);
+
 useFrame((state) =>{
   const {clock} = state;
-
  
   if(mesh.current){
     mesh.current.material.uniforms.uTime.value = 0.4 * clock.getElapsedTime();
@@ -52,7 +56,7 @@ useFrame((state) =>{
   return (
    <mesh ref={mesh}>
     <icosahedronGeometry args={[1, 100]}/>
-    <shaderMaterial vertexShader={vertexShader(pattern, intensity)} fragmentShader={fragmentShader(color1, color2)} uniforms={uniforms}/>
+    <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms}/>
    </mesh>
   )
 }

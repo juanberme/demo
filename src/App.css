@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+.QrContainer{
+  position: absolute;
+  top: 74vh;
+  left: 20px;
+  margin-bottom: 10px;
+}
+.QrCode{
+  padding: 5px;
+  border: 2px solid #5C7AFF;
+  border-radius: 15px;
+  width: 150px;
+}
+
+.QrPhrase{
+  margin-top: 1px;
+  font-size: 25px;
+  color: #5C7AFF;
+}

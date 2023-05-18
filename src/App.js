@@ -21,22 +21,18 @@ function App() {
   const [usersData, setUsersData] = useState([]);
 
   useEffect(() => { 
-    const getUsers = async () => {
-      try {
-        const userCollection = collection(db, "users");
-        const usersSnapshot = await getDocs(userCollection);
+    const userCollection = collection(db, "users");
+    const unsubscribe = onSnapshot(userCollection, (usersSnapshot) => {
+      const arr = [];
+      usersSnapshot.forEach(doc => {
+        if(doc.data().tags && doc.data().tags.length === 4) {
+          arr.push({...doc.data(), id: doc.id});
+        }
+      });
+      setUsersData(arr);
+    }, (e) => console.error(e));
 
-        const arr = [];
-        usersSnapshot.forEach(doc => {
-          arr.push(doc.data());
-        });
-        setUsersData(arr);
-      } catch(e) {
-        console.error(e.message);
-      }
-    };
-
-    getUsers();
+    return unsubscribe;
   }, []);
 
   return (
@@ -45,7 +41,7 @@ function App() {
         <Camera/>
 
         {usersData.map((user, i) => {
-          console.log(user);
+          console.log(user.id);
           const pattern = user.tags[0].pattern;
           //const pattern = tag1Options.findIndex(tag => user.tags[0].value === tag);
           //console.log(user.tags[0].pattern);

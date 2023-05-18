@@ -7,6 +7,7 @@ import { Light } from 'three';
 import { useEffect, useRef, useState } from 'react';
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from './components/utils/firebase.js';
+import QR from './components/images/QrCode.png';
 
 const tag1Options = [
   'Solitario(a)',
@@ -70,7 +71,7 @@ function App() {
           // Intensidad número float 1.0 1.5
 
           return (
-            <mesh ref={mesh}  position={[i * 5,0,0]} key={user.id}>
+            <mesh ref={mesh}  position={[i * 5 , 0 , 0]} key={user.id}>
               <Blob 
                 pattern={pattern} 
                 //intensity={(Math.random() * 8).toFixed(1)}
@@ -82,6 +83,10 @@ function App() {
         })}
         <OrbitControls />
       </Canvas>
+      <div className='QrContainer'>
+        <img src={QR} className='QrCode' alt='QR'/>
+        <p className='QrPhrase'>Escaneame</p>
+      </div>
     </div>
   );
 }

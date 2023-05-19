@@ -8,6 +8,7 @@ const fragmentShader = /*glsl*/ `
     uniform float uR2;
     uniform float uG2;
     uniform float uB2;
+    uniform float uForce;
 
     varying vec3 vPosition;
     varying vec3 vNormal;
@@ -37,7 +38,7 @@ const fragmentShader = /*glsl*/ `
         vec3 color2 = vec3(uR2, uG2, uB2);
         
 
-        vec3 finalColor = mix( color2,color1, 0.5 + distort * 2.5);
+        vec3 finalColor = mix(color1, color2, 0.5 + distort * 2.5);
 
         //agregarle animación
         

@@ -8,6 +8,7 @@ const vertexShader = /*glsl*/`
     uniform float uR2;
     uniform float uG2;
     uniform float uB2;
+    uniform float uForce;
 
     varying vec3 vPosition;
     varying vec3 vNormal;
@@ -156,7 +157,7 @@ const vertexShader = /*glsl*/`
 
         //MVP
         //la linea 147 modifica la intensidad
-        float displacement = vDisplacement / 1.0;
+        float displacement = vDisplacement / uForce;
         vec3 newPosition = position + normal * displacement;
         vec4 modelViewPosition = modelViewMatrix * vec4(newPosition, 1.0);
         vec4 projectedPosition = projectionMatrix * modelViewPosition;

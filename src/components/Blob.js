@@ -16,6 +16,8 @@ const uniforms = useMemo(() => {
   return {
     uTime: {value: 0},
     uIntensity: {value: 0.3},
+    //uIntensity: {value: intensity},
+    uForce: {value: intensity},
     uPattern: {value: pattern},
     uR1: {value: color1.r},
     uG1: {value: color1.g},
@@ -43,7 +45,7 @@ const onBeforeCompile = (shader) => {
 
 useEffect(() => {
   mesh.current.material.uniforms.uPattern.value = pattern;
-}, [pattern, intensity]);
+}, /*[pattern, intensity]*/);
 
 useFrame((state) =>{
   const {clock} = state;

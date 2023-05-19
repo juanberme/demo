@@ -16,7 +16,13 @@ const uniforms = useMemo(() => {
   return {
     uTime: {value: 0},
     uIntensity: {value: 0.3},
-    uPattern: {value: pattern}
+    uPattern: {value: pattern},
+    uR1: {value: color1.r},
+    uG1: {value: color1.g},
+    uB1: {value: color1.b},
+    uR2: {value: color2.r},
+    uG2: {value: color2.g},
+    uB2: {value: color2.b}
   };
 }, []);
 

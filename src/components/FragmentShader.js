@@ -2,6 +2,12 @@ const fragmentShader = /*glsl*/ `
     uniform float uIntensity;
     uniform float uTime;
     uniform int uPattern;
+    uniform float uR1;
+    uniform float uG1;
+    uniform float uB1;
+    uniform float uR2;
+    uniform float uG2;
+    uniform float uB2;
 
     varying vec3 vPosition;
     varying vec3 vNormal;
@@ -27,8 +33,8 @@ const fragmentShader = /*glsl*/ `
 
         //float mixValue = vUv.y;
 
-        vec3 color1 = vec3(0.957,0.529,0.714);
-        vec3 color2 = vec3(0.992,0.882,0.176);
+        vec3 color1 = vec3(uR1, uG1, uB1);
+        vec3 color2 = vec3(uR2, uG2, uB2);
         
 
         vec3 finalColor = mix( color2,color1, 0.5 + distort * 2.5);

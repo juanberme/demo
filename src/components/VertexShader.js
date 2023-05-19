@@ -2,6 +2,12 @@ const vertexShader = /*glsl*/`
     uniform float uIntensity;
     uniform float uTime;
     uniform int uPattern;
+    uniform float uR1;
+    uniform float uG1;
+    uniform float uB1;
+    uniform float uR2;
+    uniform float uG2;
+    uniform float uB2;
 
     varying vec3 vPosition;
     varying vec3 vNormal;

@@ -15,7 +15,7 @@ const hover = useRef(false);
 const uniforms = useMemo(() => {
   return {
     uTime: {value: 0},
-    uIntensity: {value: 0.3},
+    uIntensity: {value: 0.5},
     //uIntensity: {value: intensity},
     uForce: {value: intensity},
     uPattern: {value: pattern},

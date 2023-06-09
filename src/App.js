@@ -151,7 +151,7 @@ function App() {
           // Intensidad número float 1.0 1.5
 
           return (
-            <mesh ref={mesh}  position={[i * 5 , 0 , 0]} key={user.id}>
+            <mesh ref={mesh}  position={[15 * (0.5 - Math.random()) , 15 * (0.5 - Math.random()) , 15 * (0.5 - Math.random())]} key={user.id}>
               <Blob 
                 pattern={pattern} 
                 //intensity={(Math.random() * 8).toFixed(1)}

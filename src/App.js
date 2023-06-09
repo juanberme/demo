@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from './components/utils/firebase.js';
 import QR from './components/images/QrCode.png';
+import Logo from './components/images/postobon-logo.jpg';
 
 const tag1Options = [
   'Solitario(a)',
@@ -162,10 +163,20 @@ function App() {
         })}
         <OrbitControls />
       </Canvas>
-      <div className='QrContainer'>
-        <img src={QR} className='QrCode' alt='QR'/>
-        <p className='QrPhrase'>Escaneame</p>
-      </div>
+
+
+        <div className='QrContainer'>
+          <img src={QR} className='QrCode' alt='QR'/>
+          <p className='QrPhrase'>Escaneame</p>
+        </div>
+
+        <div className='Title'>
+          <h1>¿Qué gaseosa eres según tu personalidad?</h1>
+        </div>
+
+        <div className='Sponsor'>
+          <span>Invita: </span> <img id='logoImg' src={Logo} alt='logo_empresa'/>
+        </div>
     </div>
   );
 }

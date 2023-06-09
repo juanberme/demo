@@ -1,3 +1,7 @@
+html{
+  font-size: 24px;
+}
+
 .App {
   text-align: center;
 }
@@ -39,9 +43,8 @@
 
 .QrContainer{
   position: absolute;
-  top: 74vh;
-  left: 20px;
-  margin-bottom: 10px;
+  bottom: 1.5rem;
+  left: 2.5rem;
 }
 .QrCode{
   padding: 5px;
@@ -54,4 +57,35 @@
   margin-top: 1px;
   font-size: 25px;
   color: #5C7AFF;
+}
+
+.Title{
+  position: absolute;
+
+  font-size: 0.85em;
+
+  top: 2.5rem;
+  left: 25%;
+
+  color: #5C7AFF;
+}
+
+.Sponsor{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  position: absolute;
+
+  font-size: 1.5em;
+  font-weight: 700;
+
+  color: #5C7AFF;
+
+  bottom: 2.5rem;
+  right: 2.5rem;
+}
+
+#logoImg{
+  width: 7.5rem;
 }

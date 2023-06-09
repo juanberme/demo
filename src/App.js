@@ -163,8 +163,6 @@ function App() {
         })}
         <OrbitControls />
       </Canvas>
-
-
         <div className='QrContainer'>
           <img src={QR} className='QrCode' alt='QR'/>
           <p className='QrPhrase'>Escaneame</p>
